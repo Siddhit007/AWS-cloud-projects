@@ -1,118 +1,170 @@
-# -AWS-Beginner-Projects-Siddhi
-This repository contains my hands-on beginner projects on AWS, focusing on core services like EC2, web servers, and S3.
-AWS Beginner Projects – Siddhi
+# 🚀 AWS Beginner Projects – Siddhi
 
 This repository contains my hands-on beginner projects on AWS, focusing on core services like EC2, web servers, and S3.
 
-📌 Project 1: Hosting a Website on EC2 (Nginx)
-🔹 Objective
+---
+
+## 📌 Project 1: Hosting a Website on EC2 (Nginx)
+
+### 🔹 Objective
 
 Launch an EC2 instance and host a static website using Nginx.
 
-🔹 Steps
-Launch EC2 instance (Amazon Linux 2, t2.micro)
-Configure Security Group:
-Allow SSH (Port 22)
-Allow HTTP (Port 80)
+### 🔹 Steps
 
-Connect to instance via SSH:
+1. Launch EC2 instance
 
-ssh -i <key.pem> ec2-user@<public-ip>
+   * AMI: Amazon Linux 2
+   * Instance Type: t2.micro
 
-Install Nginx:
+2. Configure Security Group:
 
-sudo yum update -y
-sudo amazon-linux-extras install nginx1 -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
+   * Allow SSH (Port 22)
+   * Allow HTTP (Port 80)
 
-Create custom webpage:
+3. Connect to instance via SSH:
 
-sudo nano /usr/share/nginx/html/index.html
+   ```bash
+   ssh -i <key.pem> ec2-user@<public-ip>
+   ```
 
-Restart Nginx:
+4. Install Nginx:
 
-sudo systemctl restart nginx
+   ```bash
+   sudo yum update -y
+   sudo amazon-linux-extras install nginx1 -y
+   sudo systemctl start nginx
+   sudo systemctl enable nginx
+   ```
 
-Access website:
+5. Create custom webpage:
 
-http://<public-ip>
-🔹 Outcome
+   ```bash
+   sudo nano /usr/share/nginx/html/index.html
+   ```
+
+6. Restart Nginx:
+
+   ```bash
+   sudo systemctl restart nginx
+   ```
+
+7. Access website:
+
+   ```
+   http://<public-ip>
+   ```
+
+### 🔹 Outcome
 
 Successfully hosted a static website on EC2 using Nginx.
 
-📌 Project 2: Adding Multiple Pages (Nginx)
-🔹 Objective
+---
 
-Enhance website by adding multiple pages.
+## 📌 Project 2: Multi-Page Website (Nginx)
 
-🔹 Steps
+### 🔹 Objective
 
-Navigate to web directory:
+Enhance the website by adding multiple pages.
 
-cd /usr/share/nginx/html
+### 🔹 Steps
 
-Create new page:
+1. Navigate to web directory:
 
-sudo nano about.html
+   ```bash
+   cd /usr/share/nginx/html
+   ```
 
-Add link in index.html:
+2. Create new page:
 
-<a href="about.html">Go to About Page</a>
+   ```bash
+   sudo nano about.html
+   ```
 
-Restart Nginx:
+3. Update index.html:
 
-sudo systemctl restart nginx
-🔹 Outcome
+   ```html
+   <a href="about.html">Go to About Page</a>
+   ```
 
-Implemented multi-page website hosted on EC2.
+4. Restart Nginx:
 
-📌 Project 3: Hosting Website using Apache
-🔹 Objective
+   ```bash
+   sudo systemctl restart nginx
+   ```
+
+### 🔹 Outcome
+
+Implemented a multi-page website hosted on EC2.
+
+---
+
+## 📌 Project 3: Hosting Website using Apache
+
+### 🔹 Objective
 
 Replace Nginx with Apache web server.
 
-🔹 Steps
+### 🔹 Steps
 
-Stop Nginx:
+1. Stop Nginx:
 
-sudo systemctl stop nginx
-sudo systemctl disable nginx
+   ```bash
+   sudo systemctl stop nginx
+   sudo systemctl disable nginx
+   ```
 
-Install Apache:
+2. Install Apache:
 
-sudo yum install httpd -y
+   ```bash
+   sudo yum install httpd -y
+   ```
 
-Start Apache:
+3. Start Apache:
 
-sudo systemctl start httpd
-sudo systemctl enable httpd
+   ```bash
+   sudo systemctl start httpd
+   sudo systemctl enable httpd
+   ```
 
-Create webpage:
+4. Create webpage:
 
-sudo nano /var/www/html/index.html
+   ```bash
+   sudo nano /var/www/html/index.html
+   ```
 
-Restart Apache:
+5. Restart Apache:
 
-sudo systemctl restart httpd
-🔹 Outcome
+   ```bash
+   sudo systemctl restart httpd
+   ```
+
+### 🔹 Outcome
 
 Successfully deployed website using Apache server.
 
-📌 Project 4: S3 Static Website Hosting
-🔹 Objective
+---
+
+## 📌 Project 4: S3 Static Website Hosting
+
+### 🔹 Objective
 
 Host a static website using Amazon S3.
 
-🔹 Steps
-Create S3 bucket (unique name)
-Disable “Block all public access”
-Upload website files (index.html, about.html)
-Enable Static Website Hosting:
-Index document: index.html
-Add bucket policy for public access
-Access via S3 endpoint URL
-🔹 Sample Bucket Policy
+### 🔹 Steps
+
+1. Create S3 bucket (unique name)
+2. Disable “Block all public access”
+3. Upload website files (index.html, about.html)
+4. Enable Static Website Hosting:
+
+   * Index document: index.html
+5. Add bucket policy for public access
+6. Access via S3 endpoint URL
+
+### 🔹 Sample Bucket Policy
+
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -125,21 +177,24 @@ Access via S3 endpoint URL
     }
   ]
 }
-🔹 Outcome
+```
+
+### 🔹 Outcome
 
 Hosted a static website using S3 without EC2.
 
-🧠 Key Learnings
-EC2 instance setup and SSH access
-Security Groups and port configuration
-Nginx vs Apache web servers
-Static website hosting on S3
-Basics of IAM policies and permissions
-📌 Future Improvements
-Use IAM roles for secure access
-Integrate EC2 with S3
-Set up Load Balancer
-Use CloudFront for CDN
-✨ Author
+---
+
+## 🧠 Key Learnings
+
+* EC2 instance setup and SSH access
+* Security Groups and port configuration
+* Nginx vs Apache web servers
+* Static website hosting on S3
+* Basics of IAM policies
+
+---
+
+## ✨ Author
 
 Siddhi Tilekar
