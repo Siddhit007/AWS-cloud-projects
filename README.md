@@ -1,72 +1,20 @@
-Compute + Networking 
-EC2 + ALB + Auto Scaling ✅
+# ☁️ AWS Cloud Projects Portfolio
 
-👉 Shows:
+This repository showcases hands-on projects built on AWS, focusing on real-world cloud architecture, scalability, and DevOps practices.
 
-High availability
-Scaling
-Load balancing
-2. 🌐 Static Website Hosting (Beginner + Must-have)
-Project Idea:
+## 🚀 Projects
 
-Host a Static Website using S3 + CloudFront
+- 🔹 [Scalable Web Application (ALB + Auto Scaling)](./Scalable%20Web%20Application%20on%20AWS%20(ALB%20+%20Auto%20Scaling))
+- 🔹 [EC2 Web Server Setup](./EC2,%20web%20servers,%20and%20S3)
 
-6
+## 🛠️ Skills Demonstrated
 
-👉 Skills:
+- EC2 & Web Hosting  
+- Load Balancing (ALB)  
+- Auto Scaling  
+- CloudWatch Monitoring  
+- Networking & Security (NACL, Security Groups)  
 
-S3
-CDN (CloudFront)
-Public access & policies
-3. 🔐 IAM + Security Project
-Project Idea:
+## 🎯 Goal
 
-Secure Multi-User AWS Setup using IAM
-
-👉 Do:
-
-Create users
-Create roles
-Attach policies
-
-👉 Skills:
-
-IAM
-Least privilege principle
-4. 🐳 Docker Project (Very Important)
-Project Idea:
-
-Containerize App & Push to Docker Hub
-
-👉 Do:
-
-Create Dockerfile
-Build image
-Push to Docker Hub
-
-👉 Skills:
-
-Docker basics
-Image lifecycle
-5. 🚀 CI/CD Pipeline (HIGH IMPACT)
-Project Idea:
-
-CI/CD using CodePipeline + GitHub + S3/EC2
-
-6
-
-👉 Skills:
-
-Automation
-DevOps
-Deployment pipeline
-6. 📊 Monitoring Project
-Project Idea:
-
-CloudWatch Alerts + Logs Monitoring
-
-👉 Do:
-
-Create alarms
-Monitor EC2
-Trigger alerts
+To build practical cloud projects and gain real-world AWS experience.
