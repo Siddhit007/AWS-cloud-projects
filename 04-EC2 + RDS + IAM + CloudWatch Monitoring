@@ -1,0 +1,102 @@
+EC2 + RDS + IAM + CloudWatch Monitoring (AWS Project)
+
+📌 Project Overview
+
+This project demonstrates building a simple web application hosted on EC2, connected to an RDS MySQL database, secured using IAM roles, and monitored using CloudWatch.
+
+🎯 Objectives
+Connect EC2 instance to RDS database
+Implement secure access using IAM roles
+Monitor system metrics using CloudWatch
+Perform real-world troubleshooting scenarios
+🏗️ Architecture
+EC2 instance hosting a web application
+RDS MySQL database for backend storage
+IAM Role attached to EC2 for secure access
+CloudWatch for monitoring metrics and logs
+🛠️ Implementation Steps
+🔹 1. Launch EC2 Instance
+Amazon Linux 2
+Enabled:
+SSH (22)
+HTTP (80)
+🔹 2. Create RDS Database
+Engine: MySQL
+Database name: testdb
+Enabled public access (for testing)
+🔹 3. Configure Security Groups
+Allowed EC2 → RDS communication on port 3306
+🔹 4. Connect EC2 to RDS
+
+Installed MySQL client:
+
+sudo yum install mysql -y
+
+Connected using:
+
+mysql -h <RDS-ENDPOINT> -u admin -p
+🔹 5. Create Database & Table
+CREATE DATABASE testdb;
+USE testdb;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50)
+);
+
+INSERT INTO users (name) VALUES ('Siddhi');
+🔹 6. Create Web Application
+
+Installed PHP:
+
+sudo yum install php php-mysqlnd -y
+
+Created index.php to fetch data from RDS.
+
+🔹 7. Configure IAM Role
+Created IAM role for EC2
+Attached CloudWatch access policy
+Enabled secure access without credentials
+🔹 8. Setup CloudWatch Monitoring
+
+Installed CloudWatch Agent:
+
+sudo yum install amazon-cloudwatch-agent -y
+
+Configured manually using JSON file and started agent.
+
+🧪 Challenges Faced & Solutions
+❌ MySQL Installation Failed (GPG Error)
+
+Cause: Outdated repository GPG key
+
+Fix: Updated GPG key and cleaned yum cache
+
+❌ Unable to Connect to RDS
+
+Cause: Security group not allowing port 3306
+
+Fix: Allowed EC2 security group in RDS inbound rules
+
+❌ CloudWatch Agent Wizard Failed
+
+Cause: Missing old configuration file
+
+Fix: Created configuration manually and started agent via CLI
+
+❌ Incorrect MySQL Command Syntax
+
+Cause: Used placeholder <RDS-ENDPOINT>
+
+Fix: Replaced with actual endpoint
+
+📊 Monitoring
+CPU utilization
+Memory usage
+System logs
+
+All metrics are available in CloudWatch dashboard
+
+💰 Cost Optimization
+Used free tier eligible services
+Deleted RDS instance without snapshot to avoid charges.
