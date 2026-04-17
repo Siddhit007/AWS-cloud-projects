@@ -1,0 +1,208 @@
+# 🚀 Scalable Web Application on AWS (ALB + Auto Scaling)
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?logo=amazon-aws)
+![EC2](https://img.shields.io/badge/EC2-Compute-blue)
+![AutoScaling](https://img.shields.io/badge/AutoScaling-Dynamic-green)
+![ALB](https://img.shields.io/badge/LoadBalancer-ALB-yellow)
+![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
+
+---
+
+## 📌 Project Overview
+
+This project demonstrates how to deploy a **highly available and scalable web application** on AWS using:
+
+* Amazon EC2
+* Application Load Balancer (ALB)
+* Auto Scaling Group
+* CloudWatch Monitoring
+
+The application automatically distributes traffic and scales based on demand.
+
+---
+
+## 🏗️ Architecture
+
+* Multiple EC2 instances deployed across different Availability Zones
+* Application Load Balancer distributes incoming traffic
+* Auto Scaling dynamically adjusts instance count
+* CloudWatch monitors performance
+
+---
+
+## 🛠️ Implementation Steps
+
+### 🔹 1. Launch EC2 Instance
+
+* AMI: Amazon Linux 2
+* Instance type: t2.micro
+* Allowed HTTP (port 80)
+
+Install Apache:
+
+```bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+```
+
+Create web page:
+
+```bash
+echo "Hello from $(hostname)" > /var/www/html/index.html
+```
+
+---
+
+### 🔹 2. Create AMI
+
+* Created image from configured EC2 instance
+* Used for launching multiple instances
+
+---
+
+### 🔹 3. Create Launch Template
+
+* Selected created AMI
+* Configured instance type and security group
+
+---
+
+### 🔹 4. Create Target Group
+
+* Target type: Instance
+* Protocol: HTTP
+* Port: 80
+* Registered EC2 instances
+
+---
+
+### 🔹 5. Create Application Load Balancer
+
+* Scheme: Internet-facing
+* Listener: HTTP (80)
+* Selected multiple public subnets
+* Attached target group
+
+---
+
+### 🔹 6. Configure Security Groups
+
+**ALB Security Group:**
+
+* Allow HTTP (80) from `0.0.0.0/0`
+
+**EC2 Security Group:**
+
+* Allow HTTP (80) from ALB security group
+
+---
+
+### 🔹 7. Create Auto Scaling Group
+
+* Minimum: 2 instances
+* Desired: 2 instances
+* Maximum: 4 instances
+* Attached to Load Balancer
+
+---
+
+### 🔹 8. Configure Scaling Policy
+
+* Type: Target Tracking
+* Metric: CPU Utilization
+* Target: 50%
+
+---
+
+### 🔹 9. Monitoring
+
+* Used CloudWatch to monitor:
+
+  * CPU utilization
+  * Instance count
+  * Scaling events
+
+---
+
+### 🔹 10. Testing
+
+* Accessed application via ALB DNS
+* Verified load balancing across instances
+* Observed scaling behavior
+
+---
+
+## 🧪 Troubleshooting
+
+### ❌ ALB DNS not accessible (Timeout)
+
+**Cause:** Network ACL blocking traffic
+
+**Fix:**
+
+* Updated NACL rules to allow inbound and outbound traffic
+
+---
+
+### ❌ Targets unhealthy
+
+**Fix:**
+
+* Verified Apache service is running
+* Checked security group rules
+* Validated health check path (`/`)
+
+---
+
+## 💰 Cost Estimate
+
+| Resource          | Cost (Approx) |
+| ----------------- | ------------- |
+| EC2 (2 instances) | ₹40–₹50/day   |
+| ALB               | ₹25–₹40/day   |
+| CloudWatch        | Minimal       |
+
+---
+
+## 🧹 Cleanup
+
+To avoid charges:
+
+* Delete Auto Scaling Group
+* Delete Load Balancer
+* Delete Target Group
+* Terminate EC2 instances
+* Delete AMI & snapshots
+
+---
+
+## 🎯 Key Learnings
+
+* Built highly available architecture using multi-AZ setup
+* Implemented load balancing with ALB
+* Configured dynamic scaling using Auto Scaling
+* Debugged real-world networking issue (NACL blocking traffic)
+
+---
+
+## 💼 Resume Description
+
+> Built a scalable and highly available web application using AWS EC2, Application Load Balancer, and Auto Scaling. Implemented dynamic scaling policies and monitored performance using CloudWatch. Resolved networking issues involving Network ACLs to ensure external accessibility.
+
+---
+
+## ⭐ Future Enhancements
+
+* Add HTTPS using ACM
+* Integrate CI/CD pipeline (CodePipeline + GitHub)
+* Use custom domain with Route 53
+
+---
+
+## 🙌 Acknowledgement
+
+This project was built as part of hands-on AWS cloud learning and practical implementation.
+
+---
