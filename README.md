@@ -1,200 +1,72 @@
-# 🚀 AWS Beginner Projects – Siddhi
+Compute + Networking 
+EC2 + ALB + Auto Scaling ✅
 
-This repository contains my hands-on beginner projects on AWS, focusing on core services like EC2, web servers, and S3.
+👉 Shows:
 
----
+High availability
+Scaling
+Load balancing
+2. 🌐 Static Website Hosting (Beginner + Must-have)
+Project Idea:
 
-## 📌 Project 1: Hosting a Website on EC2 (Nginx)
+Host a Static Website using S3 + CloudFront
 
-### 🔹 Objective
+6
 
-Launch an EC2 instance and host a static website using Nginx.
+👉 Skills:
 
-### 🔹 Steps
+S3
+CDN (CloudFront)
+Public access & policies
+3. 🔐 IAM + Security Project
+Project Idea:
 
-1. Launch EC2 instance
+Secure Multi-User AWS Setup using IAM
 
-   * AMI: Amazon Linux 2
-   * Instance Type: t2.micro
+👉 Do:
 
-2. Configure Security Group:
+Create users
+Create roles
+Attach policies
 
-   * Allow SSH (Port 22)
-   * Allow HTTP (Port 80)
+👉 Skills:
 
-3. Connect to instance via SSH:
+IAM
+Least privilege principle
+4. 🐳 Docker Project (Very Important)
+Project Idea:
 
-   ```bash
-   ssh -i <key.pem> ec2-user@<public-ip>
-   ```
+Containerize App & Push to Docker Hub
 
-4. Install Nginx:
+👉 Do:
 
-   ```bash
-   sudo yum update -y
-   sudo amazon-linux-extras install nginx1 -y
-   sudo systemctl start nginx
-   sudo systemctl enable nginx
-   ```
+Create Dockerfile
+Build image
+Push to Docker Hub
 
-5. Create custom webpage:
+👉 Skills:
 
-   ```bash
-   sudo nano /usr/share/nginx/html/index.html
-   ```
+Docker basics
+Image lifecycle
+5. 🚀 CI/CD Pipeline (HIGH IMPACT)
+Project Idea:
 
-6. Restart Nginx:
+CI/CD using CodePipeline + GitHub + S3/EC2
 
-   ```bash
-   sudo systemctl restart nginx
-   ```
+6
 
-7. Access website:
+👉 Skills:
 
-   ```
-   http://<public-ip>
-   ```
+Automation
+DevOps
+Deployment pipeline
+6. 📊 Monitoring Project
+Project Idea:
 
-### 🔹 Outcome
+CloudWatch Alerts + Logs Monitoring
 
-Successfully hosted a static website on EC2 using Nginx.
+👉 Do:
 
----
-
-## 📌 Project 2: Multi-Page Website (Nginx)
-
-### 🔹 Objective
-
-Enhance the website by adding multiple pages.
-
-### 🔹 Steps
-
-1. Navigate to web directory:
-
-   ```bash
-   cd /usr/share/nginx/html
-   ```
-
-2. Create new page:
-
-   ```bash
-   sudo nano about.html
-   ```
-
-3. Update index.html:
-
-   ```html
-   <a href="about.html">Go to About Page</a>
-   ```
-
-4. Restart Nginx:
-
-   ```bash
-   sudo systemctl restart nginx
-   ```
-
-### 🔹 Outcome
-
-Implemented a multi-page website hosted on EC2.
-
----
-
-## 📌 Project 3: Hosting Website using Apache
-
-### 🔹 Objective
-
-Replace Nginx with Apache web server.
-
-### 🔹 Steps
-
-1. Stop Nginx:
-
-   ```bash
-   sudo systemctl stop nginx
-   sudo systemctl disable nginx
-   ```
-
-2. Install Apache:
-
-   ```bash
-   sudo yum install httpd -y
-   ```
-
-3. Start Apache:
-
-   ```bash
-   sudo systemctl start httpd
-   sudo systemctl enable httpd
-   ```
-
-4. Create webpage:
-
-   ```bash
-   sudo nano /var/www/html/index.html
-   ```
-
-5. Restart Apache:
-
-   ```bash
-   sudo systemctl restart httpd
-   ```
-
-### 🔹 Outcome
-
-Successfully deployed website using Apache server.
-
----
-
-## 📌 Project 4: S3 Static Website Hosting
-
-### 🔹 Objective
-
-Host a static website using Amazon S3.
-
-### 🔹 Steps
-
-1. Create S3 bucket (unique name)
-2. Disable “Block all public access”
-3. Upload website files (index.html, about.html)
-4. Enable Static Website Hosting:
-
-   * Index document: index.html
-5. Add bucket policy for public access
-6. Access via S3 endpoint URL
-
-### 🔹 Sample Bucket Policy
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicRead",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::<bucket-name>/*"
-    }
-  ]
-}
-```
-
-### 🔹 Outcome
-
-Hosted a static website using S3 without EC2.
-
----
-
-## 🧠 Key Learnings
-
-* EC2 instance setup and SSH access
-* Security Groups and port configuration
-* Nginx vs Apache web servers
-* Static website hosting on S3
-* Basics of IAM policies
-
----
-
-## ✨ Author
-
-Siddhi Tilekar
+Create alarms
+Monitor EC2
+Trigger alerts
