@@ -1,0 +1,166 @@
+# 🚀 Deploying a Python Web Application using AWS Elastic Beanstalk
+
+## 📌 Project Overview
+
+This project demonstrates how to deploy a simple Python web application using AWS Elastic Beanstalk. The application is built using Flask and deployed to the cloud without manually managing infrastructure.
+
+---
+
+## 🧰 Tech Stack
+
+* Python 3.x
+* Flask
+* Gunicorn
+* AWS Elastic Beanstalk
+* AWS EC2 (managed by Beanstalk)
+
+---
+
+## 📂 Project Structure
+
+```
+myapp/
+│── application.py
+│── requirements.txt
+│── Procfile (optional for production)
+```
+
+---
+
+## ⚙️ Application Code
+
+### application.py
+
+```python
+from flask import Flask
+application = Flask(__name__)
+
+@application.route('/')
+def home():
+    return "Hello from AWS Elastic Beanstalk 🚀"
+
+if __name__ == "__main__":
+    application.run()
+```
+
+---
+
+### requirements.txt
+
+```
+flask
+gunicorn
+```
+
+---
+
+## ▶️ Run Locally
+
+1. Create virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run application:
+
+```bash
+python application.py
+```
+
+4. Open in browser:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## ☁️ Deployment Steps
+
+### 1. Install EB CLI
+
+```bash
+pip install awsebcli
+```
+
+### 2. Configure AWS
+
+```bash
+aws configure
+```
+
+### 3. Initialize project
+
+```bash
+eb init
+```
+
+### 4. Create environment & deploy
+
+```bash
+eb create myapp-env
+```
+
+### 5. Open deployed app
+
+```bash
+eb open
+```
+
+---
+
+## 🧠 Key Concepts Learned
+
+* Platform as a Service (PaaS)
+* Application deployment on AWS
+* Environment management
+* Logging and debugging using EB CLI
+* Difference between Elastic Beanstalk and EC2
+
+---
+
+## ⚠️ Common Issues
+
+* Missing `requirements.txt`
+* Wrong file name (must be `application.py`)
+* Dependency errors
+* Port mismatch
+
+---
+
+## 💸 Cost Management
+
+To avoid AWS charges, terminate the environment after testing:
+
+```bash
+eb terminate
+```
+
+---
+
+## 📸 Output
+
+Successfully deployed a live Python application accessible via a public URL.
+
+---
+
+## 🎯 Future Improvements
+
+* Add RDS (MySQL/PostgreSQL)
+* Store static files in S3
+* Add CI/CD pipeline
+* Configure custom domain & HTTPS
+
+---
+
+## 👩‍💻 Author
+
+Siddhi Tilekar
