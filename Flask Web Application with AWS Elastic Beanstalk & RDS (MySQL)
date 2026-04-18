@@ -1,0 +1,122 @@
+Flask Web Application with AWS Elastic Beanstalk & RDS (MySQL)
+📌 Project Overview
+
+This project demonstrates deploying a Python Flask web application on AWS Elastic Beanstalk and integrating it with an Amazon RDS MySQL database. It showcases a real-world cloud architecture where a web application interacts with a managed database securely.
+
+🧰 Tech Stack
+Python 3.x
+Flask
+Gunicorn
+AWS Elastic Beanstalk
+Amazon EC2 (managed by Beanstalk)
+Amazon RDS (MySQL)
+PyMySQL
+🏗️ Architecture
+Client → Web Application (Elastic Beanstalk)
+Application → Database (RDS MySQL)
+Communication secured using security groups and environment variables
+📂 Project Structure
+myapp/
+│── application.py
+│── requirements.txt
+│── Procfile
+⚙️ Application Code
+application.py
+from flask import Flask
+import pymysql
+import os
+
+application = Flask(__name__)
+
+DB_HOST = os.environ.get('DB_HOST')
+DB_USER = os.environ.get('DB_USER')
+DB_PASS = os.environ.get('DB_PASS')
+DB_NAME = os.environ.get('DB_NAME')
+
+@application.route('/')
+def home():
+    if not all([DB_HOST, DB_USER, DB_PASS, DB_NAME]):
+        return "❌ Environment variables not set"
+
+    try:
+        connection = pymysql.connect(
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASS,
+            database=DB_NAME,
+            connect_timeout=5
+        )
+
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 'Hello from RDS!'")
+            result = cursor.fetchone()
+
+        connection.close()
+        return f"✅ DB Connected: {result[0]}"
+
+    except Exception as e:
+        return f"❌ Database connection failed: {str(e)}"
+📦 requirements.txt
+flask
+gunicorn
+pymysql
+cryptography
+▶️ Run Locally
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python application.py
+
+Open:
+
+http://127.0.0.1:5000
+☁️ Deployment Steps
+1. Initialize Beanstalk
+eb init
+2. Create environment
+eb create myapp-env
+3. Set environment variables
+eb setenv DB_HOST=<RDS-ENDPOINT> DB_USER=admin DB_PASS=<PASSWORD> DB_NAME=<DB_NAME>
+4. Deploy
+eb deploy
+🗄️ RDS Setup
+Create MySQL database on AWS RDS
+Enable public access (for testing)
+Create database:
+CREATE DATABASE yourdb;
+🔐 Security Configuration
+Allow inbound MySQL (3306) from:
+Elastic Beanstalk security group
+Local machine IP (for testing)
+🧪 Testing
+Access application via Elastic Beanstalk URL
+Expected output:
+✅ DB Connected: Hello from RDS!
+⚠️ Common Issues
+Missing cryptography package
+Incorrect DB name
+Security group not configured
+Wrong environment variables
+💸 Cost Management
+
+To avoid charges:
+
+eb terminate
+
+Also delete RDS instance from AWS Console.
+
+🎯 Key Learnings
+Deploying applications using AWS Elastic Beanstalk
+Connecting applications to managed databases (RDS)
+Using environment variables for secure configuration
+Configuring AWS security groups for controlled access
+Debugging real-world deployment issues
+🚀 Future Enhancements
+Implement CRUD operations
+Add frontend UI
+Use AWS S3 for static files
+Add CI/CD pipeline (GitHub Actions)
+Configure custom domain & HTTPS
+👩‍💻 Author
+
+Siddhi Tilekar
