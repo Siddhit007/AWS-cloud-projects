@@ -1,0 +1,82 @@
+Overview
+
+This project demonstrates a three-tier architecture on AWS, consisting of:
+
+Presentation Layer (Web) – Hosted on EC2
+Application Layer (Backend Logic) – Running on EC2
+Database Layer – Hosted on RDS (MySQL)
+
+The architecture is designed with network isolation, security, and scalability concepts, while remaining Free Tier friendly.
+
+🔄 Flow:
+
+User → EC2 (Public Subnet) → RDS (Private Subnet)
+
+🛠️ Services Used
+Amazon EC2 – Web & Application server
+Amazon RDS – MySQL database
+Amazon VPC – Network isolation
+Amazon S3 – (Optional static hosting)
+Amazon CloudWatch – Monitoring
+🌐 Network Design
+Custom VPC (10.0.0.0/16)
+Public Subnet → EC2 (with Internet Gateway)
+Private Subnet(s) → RDS (no public access)
+Route Tables configured for controlled access
+🔐 Security
+EC2 Security Group:
+HTTP (80) → Public
+SSH (22) → Restricted to personal IP
+RDS Security Group:
+MySQL (3306) → Allowed only from EC2 Security Group
+
+👉 Ensures secure communication between tiers
+
+⚙️ Setup Steps
+1️⃣ Create VPC & Subnets
+Created public and private subnets
+Attached Internet Gateway to public subnet
+2️⃣ Launch EC2 Instance
+Installed Apache & PHP
+Hosted web application
+3️⃣ Create RDS Database
+MySQL DB in private subnet
+Disabled public access
+4️⃣ Configure Security Groups
+Allowed EC2 → RDS communication
+5️⃣ Connect EC2 to RDS
+Used MySQL client to establish connection
+Created database and tables
+6️⃣ Deploy Application
+Built PHP app to fetch data from RDS
+Displayed data on browser
+💻 Sample Application
+Simple PHP application
+Connects to RDS database
+Fetches and displays user data
+🎯 Key Learnings
+VPC and subnet design
+Security Groups and access control
+EC2 to RDS connectivity
+Basic 3-tier architecture
+Troubleshooting (HTTP 500, DB connection issues)
+💸 Cost Optimization
+Used Free Tier resources:
+t2.micro EC2
+db.t2.micro RDS
+Avoided:
+NAT Gateway
+Load Balancer
+🚧 Future Enhancements
+Add Application Load Balancer
+Implement Auto Scaling
+Use Terraform for automation
+Add CI/CD pipeline
+
+🧠 Interview Explanation
+
+“Designed and deployed a three-tier architecture on AWS with EC2 handling the web/app layer and RDS in a private subnet for secure data storage, ensuring proper network isolation and secure communication.”
+
+👩‍💻 Author
+
+Siddhi Tilekar
