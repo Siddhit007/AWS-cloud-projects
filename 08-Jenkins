@@ -1,0 +1,101 @@
+# Jenkins + Tomcat Deployment Project on AWS EC2
+
+## 📌 Project Overview
+This project demonstrates how to set up a complete CI/CD environment using **Jenkins**, **Tomcat**, and **AWS EC2**.  
+A Jenkins controller was configured on a local WSL machine, and a remote Linux agent (`Linux-slave`) was connected through SSH to automate deployment tasks.
+
+The project simulates a real-world DevOps workflow where code can be built and deployed to Apache Tomcat hosted on an EC2 instance.
+
+---
+
+## 🏗️ Architecture
+
+Developer → Jenkins (WSL Laptop) → Remote Jenkins Agent (AWS EC2) → Apache Tomcat Server
+
+---
+
+## ⚙️ Technologies Used
+
+- :contentReference[oaicite:0]{index=0}
+- :contentReference[oaicite:1]{index=1}
+- Amazon EC2
+- Amazon Linux
+- SSH
+- Linux
+- Git
+
+---
+
+## 🚀 Steps Implemented
+
+### 1️⃣ Jenkins Installation on WSL
+- Installed Jenkins on Ubuntu WSL
+- Accessed Jenkins UI on browser using port `8080`
+
+### 2️⃣ EC2 Instance Setup
+- Launched Linux EC2 instance in AWS Mumbai region
+- Configured Security Group rules:
+  - SSH (22)
+  - Tomcat Port (8080)
+
+### 3️⃣ Jenkins Agent Configuration
+- Created Jenkins node named `Linux-slave`
+- Connected via SSH using PEM key authentication
+- Configured remote workspace:
+```bash
+/home/ec2-user/jenkins
+4️⃣ Tomcat Installation on EC2
+
+Installed and configured Apache Tomcat.
+
+5️⃣ Node Troubleshooting Performed
+
+Resolved real-time issues such as:
+
+SSH Authentication failure
+Wrong username/key mismatch
+Permission denied on /var/jenkins
+Jenkins node offline due to /tmp low disk threshold
+Increased /tmp tmpfs size from 480MB to 2GB
+6️⃣ Deployment Ready Setup
+
+Jenkins agent now ready to deploy WAR files into Tomcat webapps folder.
+
+🧪 Validation Commands Used
+ssh -i key.pem ec2-user@<public-ip>
+df -h /tmp
+sudo mount -o remount,size=2G /tmp
+📂 Sample Jenkins Pipeline
+pipeline {
+    agent { label 'Linux-slave' }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                sh 'cp app.war /opt/tomcat/webapps/'
+            }
+        }
+    }
+}
+🎯 Key Learnings
+Jenkins Master-Agent Architecture
+SSH-based Agent Connectivity
+Linux File Permissions
+AWS EC2 Networking & Security Groups
+Tomcat Deployment Process
+Jenkins Node Monitoring
+Infrastructure Troubleshooting
+📸 Output
+Jenkins Node Connected Successfully
+Linux Agent Online
+Tomcat Ready for Deployment
+
+👩‍💻 Author
+
+Siddhi Tilekar
