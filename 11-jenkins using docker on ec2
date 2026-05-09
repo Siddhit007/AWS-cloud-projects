@@ -1,0 +1,269 @@
+# Jenkins CI/CD Pipeline Project using Docker on AWS EC2
+
+This project demonstrates a complete CI/CD pipeline implementation using Jenkins, Docker, GitHub, and AWS EC2.
+
+The pipeline automates:
+- Pulling source code from GitHub
+- Building a Docker image
+- Running the application container automatically
+
+---
+
+## Technologies Used
+
+- Jenkins
+- Docker
+- GitHub
+- AWS EC2
+- Ubuntu
+- Git
+
+---
+
+## Project Architecture
+
+```text
+Developer → GitHub → Jenkins Pipeline → Docker Build → Docker Container → Application Deployment
+```
+
+---
+
+## Features
+
+- Automated CI/CD pipeline using Jenkins
+- Dockerized application deployment
+- GitHub integration
+- Jenkins pipeline automation
+- AWS EC2 hosting
+- Reduced manual deployment effort
+
+---
+
+## Prerequisites
+
+- AWS Account
+- EC2 Ubuntu Instance
+- Docker Installed
+- Jenkins Installed
+- GitHub Repository
+- Open Security Group Ports:
+  - 22 (SSH)
+  - 8080 (Jenkins)
+  - 80 (Application)
+
+---
+
+## EC2 Setup
+
+### Connect to EC2
+
+```bash
+ssh -i your-key.pem ubuntu@PUBLIC-IP
+```
+
+---
+
+## Install Docker
+
+```bash
+sudo apt update
+sudo apt install docker.io -y
+```
+
+Enable Docker:
+
+```bash
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+Verify:
+
+```bash
+docker --version
+```
+
+---
+
+## Install Jenkins
+
+```bash
+sudo apt install openjdk-17-jdk -y
+```
+
+Install Jenkins and start service.
+
+Check status:
+
+```bash
+sudo systemctl status jenkins
+```
+
+---
+
+## Access Jenkins
+
+Open browser:
+
+```text
+http://EC2-PUBLIC-IP:8080
+```
+
+Get Jenkins initial password:
+
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+---
+
+## Create Sample Application
+
+### Dockerfile
+
+```dockerfile
+FROM nginx:latest
+COPY . /usr/share/nginx/html
+```
+
+---
+
+### index.html
+
+```html
+<h1>CI/CD Pipeline is Working</h1>
+```
+
+---
+
+## GitHub Setup
+
+Initialize repository:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+Push to GitHub:
+
+```bash
+git remote add origin YOUR_GITHUB_REPO_URL
+git push -u origin main
+```
+
+---
+
+## Jenkins Pipeline Configuration
+
+Create Jenkins Pipeline Job and add:
+
+```groovy
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone Repository') {
+            steps {
+                git 'YOUR_GITHUB_REPO_URL'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t demo-app .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker stop demo-container || true'
+                sh 'docker rm demo-container || true'
+                sh 'docker run -d -p 80:80 --name demo-container demo-app'
+            }
+        }
+    }
+}
+```
+
+---
+
+## Build Pipeline
+
+In Jenkins:
+- Click **Build Now**
+
+Pipeline stages:
+1. Clone Repository
+2. Build Docker Image
+3. Deploy Docker Container
+
+---
+
+## Verify Deployment
+
+Open:
+
+```text
+http://EC2-PUBLIC-IP
+```
+
+Application should display:
+
+```text
+CI/CD Pipeline is Working
+```
+
+---
+
+## Docker Commands Used
+
+### View Running Containers
+
+```bash
+docker ps
+```
+
+### Stop Container
+
+```bash
+docker stop demo-container
+```
+
+### Remove Container
+
+```bash
+docker rm demo-container
+```
+
+### View Docker Images
+
+```bash
+docker images
+```
+
+---
+
+## Learning Outcomes
+
+- CI/CD Pipeline Automation
+- Jenkins Pipeline Configuration
+- Docker Containerization
+- GitHub Integration
+- AWS EC2 Deployment
+- Automated Application Deployment
+- DevOps Workflow Understanding
+
+---
+
+## Resume Description
+
+Built and maintained CI/CD pipelines using Jenkins and Docker to automate application build and deployment on AWS EC2, reducing manual deployment effort.
+
+---
+
+## Author
+
+Siddhi Tilekar
